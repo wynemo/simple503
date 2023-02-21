@@ -45,6 +45,7 @@ from natsort import natsorted
 from shippinglabel import normalize
 from shippinglabel.checksum import get_sha256_hash
 from typing_extensions import Literal
+from pkginfo import Sdist
 
 if TYPE_CHECKING:
 	# stdlib
@@ -155,6 +156,17 @@ def make_simple(
 						wheel_hash=get_sha256_hash(target_file),
 						requires_python=wheel_metadata.get("Requires-Python"),
 						metadata_hash=get_sha256_hash(metadata_filename),
+						)
+				)
+
+	for source_file in origin.iterchildren(exclude_dirs=unwanted_dirs, match="**/*.tar.gz"):
+		p = SDist('/data/aliyun/flask/MarkupSafe-1.1.1.tar.gz')
+		target_file = target / source_file.relative_to(origin)
+		projects[p.name].append(
+			WheelFile(
+						filename=target_file.relative_to(target).as_posix(),
+						wheel_hash=get_sha256_hash(target_file), # ???
+						requires_python=p.requires_python,
 						)
 				)
 
