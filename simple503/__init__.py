@@ -160,7 +160,7 @@ def make_simple(
 				)
 
 	for source_file in origin.iterchildren(exclude_dirs=unwanted_dirs, match="**/*.tar.gz"):
-		p = SDist('/data/aliyun/flask/MarkupSafe-1.1.1.tar.gz')
+		p = SDist(source_file)
 		target_file = target / source_file.relative_to(origin)
 		projects[p.name].append(
 			WheelFile(
