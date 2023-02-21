@@ -45,7 +45,7 @@ from natsort import natsorted
 from shippinglabel import normalize
 from shippinglabel.checksum import get_sha256_hash
 from typing_extensions import Literal
-from pkginfo import Sdist
+from pkginfo import SDist
 
 if TYPE_CHECKING:
 	# stdlib
